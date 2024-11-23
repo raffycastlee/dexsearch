@@ -1,0 +1,97 @@
+/* something something media query to handle mobile */
+button.floating {
+  position: fixed;
+  top: 85%;
+  right: 10%;
+  z-index: 9999;
+
+  width: 4rem;
+  height: 4rem;
+  border-radius: 36px;
+  border: 0px;
+
+  color: white;
+  font-weight: 900;
+  font-size: 2rem;
+}
+
+button#search {
+  background-color: #3485ff;
+}
+
+button#close {
+  background-color: #ff3434;
+}
+
+header {
+  padding: 0.75rem;
+  text-align: center;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+div#main-poke {
+  text-align: center;
+}
+
+#content-container {
+  width: 100%;
+}
+
+#content-container>ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.75rem;
+}
+div.poke-li-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+li .types {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.33rem;
+}
+
+#display-buttons {
+  display: flex;
+  gap: 1.5rem;
+}
+
+#display-buttons>button {
+  margin: 1.5rem 0;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+#modal {
+  background-color:rgba(0, 0, 0, 0.783);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+div#form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  height: 10%;
+  width: 80%;
+}
+
+form {
+  text-align: center;
+}
