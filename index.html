@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DexSearch</title>
+    <script type="module" crossorigin src="/dexsearch/assets/index-DPaPRm6G.js"></script>
+    <link rel="stylesheet" crossorigin href="/dexsearch/assets/index-CZViWRKd.css">
+  </head>
+  <body>
+    <div id="modal" class="hidden">
+      <div class="watermark">
+        <p>please don't spam submit it will break</p>
+        <p>please don't spam submit it will break</p>
+        <p>please don't spam submit it will break</p>
+        <p>please don't spam submit it will break</p>
+        <p>please don't spam submit it will break</p>
+      </div>
+      <div id="form-container">
+        <form>
+          <h2 id="form-label">Search Pokemon</h2>
+          <label for="keyword">ID or Name:</label>
+          <input type="text" name="keyword" id="keyword" required>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <div class="watermark">
+        <p>please don't spam submit it will break</p>
+        <p>please don't spam submit it will break</p>
+        <p>please don't spam submit it will break</p>
+        <p>please don't spam submit it will break</p>
+        <p>please don't spam submit it will break</p>
+      </div>
+    </div>
+    <div id="app">
+      <header>
+        <div id="h1-container">
+          <h1>DexSearch</h1>
+        </div>
+      </header>
+      <main>
+        <button id="search" class="floating">🔍</button>
+        <button id="close" class="floating hidden">x</button>
+        <div id="main-poke">
+          <h2></h2>
+          <img src="" alt="" srcset="">
+        </div>
+        <div id="content-container">
+          <ul id="pokedex-list">
+            <!-- js handles this -->
+          </ul>
+        </div>
+        <div id="display-buttons">
+          <button id="show-less">show less</button>
+          <button id="show-more">show more</button>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
