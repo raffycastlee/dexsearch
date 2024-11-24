@@ -16,11 +16,6 @@ const main = async () => {
   document
   .querySelector('button#close')
   .addEventListener('click', handleClose);
-  
-  // add listener for form submit modal
-  document
-  .querySelector('form')
-  .addEventListener('submit', handleSubmit);
 
   // inits GET if not in local
   await initDexIfEmpty();

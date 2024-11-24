@@ -132,7 +132,38 @@ const displayRest = async (n = currentN) => {
   // scuffed ahh button shite
 } 
 
-const handleSearch = (e) => {
+const handleSearch = () => {
+  const modal = document.querySelector('div#modal');
+  modal.innerHTML = `
+    <div class="watermark">
+      <p>please don't spam submit it will break</p>
+      <p>please don't spam submit it will break</p>
+      <p>please don't spam submit it will break</p>
+      <p>please don't spam submit it will break</p>
+      <p>please don't spam submit it will break</p>
+    </div>
+    <div id="form-container">
+      <form>
+        <h2 id="form-label">Search Pokemon</h2>
+        <label for="keyword">ID or Name:</label>
+        <input type="text" name="keyword" id="keyword" required>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div class="watermark">
+      <p>please don't spam submit it will break</p>
+      <p>please don't spam submit it will break</p>
+      <p>please don't spam submit it will break</p>
+      <p>please don't spam submit it will break</p>
+      <p>please don't spam submit it will break</p>
+    </div>
+  `;
+  // add listener for form submit modal
+  document
+  .querySelector('form')
+  .addEventListener('submit', handleSubmit);
+
+
   saveScroll = window.scrollY; 
   // unhide modal
   document
@@ -264,6 +295,19 @@ const showLess = (previousN) => {
 }
 
 const handleShowMore = async () => {
+  const modal = document.querySelector('div#modal');
+  modal.innerHTML = `
+    <h1 style="color: white;">LOADING</h1>
+  `;
+  // sink search button
+  const floatingButton = document.querySelector('.floating');
+  floatingButton.style.zIndex = 9998;
+  
+  // unhide modal
+  document
+  .querySelector('#modal')
+  .classList.remove('hidden');
+
   // save for later
   const previousN = currentN;
   if (currentN * 2 < currentDex.pokemon_entries.length) {
@@ -281,8 +325,21 @@ const handleShowMore = async () => {
     const moreButton = document.querySelector('button#show-more');
     moreButton.classList.add('hidden');
   }
+
+  const loadStart = Date.now();
+  console.log(loadStart)
   
   await showMore(previousN);
+
+  // EL O EL
+  while (loadStart+250 > Date.now()) {}
+
+  // resurface search button
+  floatingButton.style.zIndex = 9999;
+  // hide modal
+  document
+  .querySelector('#modal')
+  .classList.add('hidden');
 }
 
 const renderPokes = (pokes) => {
@@ -339,8 +396,29 @@ const handleListClick = async (e) => {
   e = e.target.closest('li');
   // now we query api using e.target.id (li has it)
   try {
+    // unhide modal
+    const modal = document.querySelector('div#modal');
+    modal.innerHTML = `
+      <h1 style="color: white;">LOADING</h1>
+    `;
+    document
+    .querySelector('#modal')
+    .classList.remove('hidden');
+
+    const loadStart = Date.now();
+    console.log(loadStart)
+
     let response = await fetch(pokemonAPI+e.id);
     currentPoke = await response.json();
+
+    // EL O EL
+    while (loadStart+250 > Date.now()) {}
+
+    // hide modal
+    document
+    .querySelector('#modal')
+    .classList.add('hidden');
+
     // handle render or page change here
     displayMainPoke();
     // a good fn maybe is to retain the scroll on the main page, so when you go back you don't have to scroll all the way down if the entry is like. way below and shite.
@@ -385,9 +463,13 @@ const displayDetails = () => {
   // adding new details to lists
   // enclosing div
   const detailsDiv = document.createElement('div');
-  detailsDiv.id = '#details-container';
+  detailsDiv.id = 'details-container';
   
   // div box for types
+  const typesP = document.createElement('p');
+  typesP.classList.add('bold');
+  typesP.textContent = 'types';
+  detailsDiv.append(typesP);
   const typesDiv = document.createElement('div');
   typesDiv.classList.add('details-types-div');
   // creates one or two spans inside types-div
@@ -414,29 +496,41 @@ const displayDetails = () => {
   detailsDiv.append(p);
   
   // abilities
+  const abilitiesP = document.createElement('p');
+  abilitiesP.classList.add('bold');
+  abilitiesP.textContent = 'abilities';
+  detailsDiv.append(abilitiesP);
   const ulAbilities = document.createElement('ul');
   ulAbilities.id = 'abilities';
   for (const [i, ability] of currentPoke.abilities.entries()) {
     const liAbility = document.createElement('li');
     liAbility.id = i+1;
-    liAbility.textContent = ability.ability.name;
+    liAbility.textContent = ability.ability.name.replaceAll(/-/g, ' ');
     ulAbilities.append(liAbility);
   }
   //append to div
   detailsDiv.append(ulAbilities);
   
   // moves
+  const movesP = document.createElement('p');
+  movesP.classList.add('bold');
+  movesP.textContent = 'moves';
+  detailsDiv.append(movesP);
   const ulMoves = document.createElement('ul');
   ulMoves.id = 'moves';
   for (const [i, move] of currentPoke.moves.entries()) {
     const liMove = document.createElement('li');
     liMove.id = i+1;
-    liMove.textContent = move.move.name;
+    liMove.textContent = move.move.name.replaceAll(/-/g, ' ');
     ulMoves.append(liMove);
   }
   detailsDiv.append(ulMoves);
   
   // sprites
+  const spritesP = document.createElement('p');
+  spritesP.classList.add('bold');
+  spritesP.textContent = 'sprites';
+  detailsDiv.append(spritesP);
   const ulSprites = document.createElement('ul');
   ulSprites.id = 'sprites';
   for (const [spriteName, spriteURL] of Object.entries(currentPoke.sprites)) {
@@ -450,7 +544,7 @@ const displayDetails = () => {
     
     const h3 = document.createElement('h3');
     h3.classList.add('sprite-text');
-    h3.textContent = spriteName;
+    h3.textContent = spriteName.replaceAll(/_/g, ' ');
     // add to parent
     spriteDiv.append(h3);
     
