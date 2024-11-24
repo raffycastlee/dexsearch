@@ -1,12 +1,5 @@
-@font-face {
-  font-family: 'ComicSansMS';
-  src: url('../font/ComicSansMS.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 * {
-  font-family: 'ComicSansMS';
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
 }
 
 h3 {
