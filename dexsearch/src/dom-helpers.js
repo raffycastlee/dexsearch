@@ -4,7 +4,7 @@ import {
 } from './data-store'
 
 let currentDex;
-let currentPoke;
+let currentPoke = getLocalStorage('dexsearchPoke') || null;
 let currentN = 21;
 let saveScroll = 0;
 
@@ -16,14 +16,14 @@ const pokemonSpeciesAPI = `https://pokeapi.co/api/v2/pokemon-species/`;
 const pokemonAPI = `https://pokeapi.co/api/v2/pokemon/`;
 
 const initDexIfEmpty = async () => {
-  const dex = getLocalStorage('dex');
+  const dex = getLocalStorage('dexsearchDex');
 
   if (dex === null) {
     try {
       // placeholder '1' for region
       let response = await fetch(pokedexAPI+1);
       currentDex = await response.json();
-      setLocalStorage('dex', currentDex);
+      setLocalStorage('dexsearchDex', currentDex);
     } catch (err) {
       console.warn(err);
     }
@@ -42,7 +42,7 @@ const getPoke = async (id = null) => {
     // placeholder
     let response = await fetch(pokemonAPI+id);
     currentPoke = await response.json();
-    setLocalStorage('poke', currentPoke);
+    setLocalStorage('dexsearchPoke', currentPoke);
   } catch (err) {
     console.warn(err);
   }
